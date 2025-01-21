@@ -290,7 +290,7 @@
 			)
 
 			renderJson.setPropertyList(void 0).setReplacer(function (k, v) {
-				var obj_from_dom = function (el) {
+				function objFromDOM(el) {
 					if (el.nodeType == el.TEXT_NODE) return el.data
 					var attributes = ''
 					if (el.attributes)
@@ -304,14 +304,16 @@
 					var obj = {}
 					obj['<' + el.tagName + attributes + '>'] = Array.prototype.map.call(
 						el.childNodes,
-						obj_from_dom
+						objFromDOM
 					)
 					return obj
 				}
+
+				console.log(k, v)
 				if (v === window) return '<window>'
 				if (v === document) return '<document>'
 				if (typeof v == 'number') return isFinite(v) ? v : v.toString() // Capture NaNs and Infinity
-				if (typeof v == 'object' && v && 'nodeType' in v) return obj_from_dom(v)
+				if (typeof v == 'object' && v && 'nodeType' in v) return objFromDOM(v)
 				else return v
 			})
 
