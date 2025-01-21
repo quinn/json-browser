@@ -1,5 +1,5 @@
-Renderjson
-==========
+JSON Browser
+============
 
 Render JSON into collapsible, themeable HTML. This library aims to be very
 simple with few options and no external dependencies. It's aimed at debugging
