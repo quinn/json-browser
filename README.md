@@ -86,7 +86,7 @@ can do.
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
 
 ```javascript
-renderjson.set_collapse_msg(collapse_function);
+renderjson.setCollapseMsg(collapse_function);
 ```
 
 Accepts a function (len:number):string => {} where len is the length of the
