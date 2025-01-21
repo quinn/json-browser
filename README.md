@@ -21,8 +21,9 @@ Example
 
 ```html
 <div id="test"></div>
-<script type="text/javascript" src="renderjson.js"></script>
-<script>
+<script type="module">
+    import { renderJson } from 'https://esm.sh/jsr/@quinn/json-browser@latest'
+
     document.getElementById("test").appendChild(
         renderjson({ hello: [1,2,3,4], there: { a:1, b:2, c:["hello", null] } })
     );
@@ -42,24 +43,24 @@ Options
 There are a couple functions to call to customize the output:
 
 ```javascript
-renderjson.set_icons('+', '-');
+renderjson.setIcons('+', '-');
 ```
 
-Call `set_icons()` to set the disclosure icons to something other than "⊕" and
+Call `setIcons()` to set the disclosure icons to something other than "⊕" and
 "⊖".
 
 ```javascript
-renderjson.set_show_to_level(level);
+renderjson.setShowToLevel(level);
 ```
 
-Call `set_show_to_level()` to show different amounts of the JSON by
+Call `setShowToLevel()` to show different amounts of the JSON by
 default. The default is `0`, and `1` is a popular choice. As a special case,
 if `level` is the string `"all"` then all the JSON will be shown by
 default. This, of course, removes the benefit of the lazy rendering, so it
 may be slow with large JSON objects.
 
 ```javascript
-renderjson.set_max_string_length(length);
+renderjson.setMaxStringLength(length);
 ```
 
 Strings will be truncated and made expandable if they are longer than
@@ -67,14 +68,14 @@ Strings will be truncated and made expandable if they are longer than
 will be no truncation. The default is `"none"`.
 
 ```javascript
-renderjson.set_sort_objects(sort_bool);
+renderjson.setSortObjects(sort_bool);
 ```
 
 Sort objects by key (default: false)
 
 ```javascript
-renderjson.set_replacer(replacer_function)
-renderjson.set_property_list(property_list)
+renderjson.setReplacer(replacer_function)
+renderjson.setPropertyList(property_list)
 ```
 
 These are the equivalent of the JSON.stringify() `replacer` parameter.
@@ -95,8 +96,8 @@ is collapsed. The default message is "X items".
 These functions are chainable so you may do:
 
 ```javascript
-renderjson.set_icons('+', '-')
-          .set_show_to_level(2)
+renderjson.setIcons('+', '-')
+          .setShowToLevel(2)
         ({ hello: [1,2,3,4], there: { a:1, b:2, c:["hello", null] } })
 ```
 
@@ -122,7 +123,8 @@ Copyright and License
 
 License: [ISC](https://en.wikipedia.org/wiki/ISC_license)
 
-Copyright © 2013-2017 David Caldwell \<david@porkrind.org\>
+Copyright © 2013-2017 David Caldwell <david@porkrind.org>
+Copyright © 2025 Quinn Shanahan
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
