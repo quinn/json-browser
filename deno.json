@@ -1,5 +1,12 @@
 {
-	"compilerOptions": {
-		"lib": ["dom", "ESNext"]
-	}
+  "name": "@quinn/json-browser",
+  "version": "0.1.0",
+  "license": "MIT",
+  "exports": "./mod.ts",
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "ESNext"
+    ]
+  }
 }
