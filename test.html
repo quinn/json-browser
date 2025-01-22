@@ -1,42 +1,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<style>
-			.renderjson a {
-				text-decoration: none;
-			}
-			.renderjson .disclosure {
-				color: crimson;
-				font-size: 150%;
-			}
-			.renderjson .syntax {
-				color: grey;
-			}
-			.renderjson .string {
-				color: darkred;
-			}
-			.renderjson .number {
-				color: darkcyan;
-			}
-			.renderjson .boolean {
-				color: blueviolet;
-			}
-			.renderjson .key {
-				color: darkblue;
-			}
-			.renderjson .keyword {
-				color: blue;
-			}
-			.renderjson .object.syntax {
-				color: lightseagreen;
-			}
-			.renderjson .array.syntax {
-				color: orange;
-			}
-		</style>
+		<link href="./output.css" rel="stylesheet" />
 		<title></title>
 	</head>
-	<body>
+	<body class="dark:bg-gray-900 dark:text-white">
 		<h1></h1>
 
 		<div id="dest"></div>
@@ -47,15 +15,26 @@
 			import { renderJson } from './mod.js'
 
 			document.getElementById('dest').appendChild(
-				renderJson //.set_show_by_default(true)
-					//.set_show_to_level(2)
-					//.set_sort_objects(true)
-					//.set_icons('+', '-')
+				renderJson
+					.setShowByDefault(true)
+					.setShowToLevel(1)
+					.setSortObjects(true)
+					.setIcons('+', '-')
+					.setReplacer(function (k, v) {
+						if (typeof v === 'string' && v.startsWith('link:')) {
+							var a = document.createElement('a')
+							a.href = v.substring(5)
+							a.textContent = v.substring(5)
+							return a
+						}
+						return v
+					})
 					.setMaxStringLength(100)([
 					// Examples from http://json.org/example.html
 					{
 						glossary: {
 							title: 'example glossary',
+							isLink: 'link:http://json.org/example.html',
 							GlossDiv: {
 								title: 'S',
 								GlossList: {

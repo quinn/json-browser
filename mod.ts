@@ -192,6 +192,9 @@ function renderJsonInternal(
 	showLevel: number,
 	options: RenderJsonOptions,
 ): Node[] {
+	if (json instanceof Node) {
+		return [json]
+	}
 	const myIndent = dontIndent ? '' : indent
 
 	function createDisclosure(
