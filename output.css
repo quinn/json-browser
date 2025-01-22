@@ -647,6 +647,10 @@ video {
   }
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 @media (prefers-color-scheme: dark) {
   .dark\:bg-gray-900 {
     --tw-bg-opacity: 1;

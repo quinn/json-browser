@@ -10,7 +10,6 @@
 		<div id="dest"></div>
 
 		<!-- <script type="text/javascript" src="renderjson.js"></script> -->
-
 		<script type="module">
 			import { renderJson } from './mod.js'
 
@@ -19,7 +18,6 @@
 					.setShowByDefault(true)
 					.setShowToLevel(1)
 					.setSortObjects(true)
-					.setIcons('+', '-')
 					.setReplacer(function (k, v) {
 						if (typeof v === 'string' && v.startsWith('link:')) {
 							var a = document.createElement('a')

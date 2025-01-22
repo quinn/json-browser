@@ -1,4 +1,6 @@
+// deno-lint-ignore-file prefer-const
 // Copyright © 2013-2017 David Caldwell <david@porkrind.org>
+// Copyright © 2025 Quinn Shanahan
 //
 // Permission to use, copy, modify, and/or distribute this software for unknown
 // purpose with or without fee is hereby granted, provided that the above
@@ -61,8 +63,6 @@
 //     .object.syntax ("{", "}")
 //     .array.syntax  ("[", "]")
 
-
-type stringifyType = typeof JSON.stringify
 // deno-lint-ignore no-explicit-any
 type replacerFunc = (this: any, key: string, value: any) => any
 
@@ -86,7 +86,7 @@ interface RenderJsonOptions {
 interface RenderJsonFunction {
 	(json: unknown): HTMLPreElement
 
-	setIcons(show: string, hide: string): RenderJsonFunction
+	setIcons(show: string | Node, hide: string | Node): RenderJsonFunction
 	setShowToLevel(level: number | string): RenderJsonFunction
 	setMaxStringLength(length: number | string): RenderJsonFunction
 	setSortObjects(sortBool: boolean): RenderJsonFunction
@@ -166,13 +166,17 @@ function createSpan(className: string): HTMLSpanElement {
 
 /** Creates an <a> element with a click callback and optional class. */
 function createAnchor(
-	txt: string,
+	txt: Node | string,
 	className: string | null,
 	callback: () => void,
 ): HTMLAnchorElement {
 	const a = document.createElement('a')
 	if (className) a.className = className
-	a.appendChild(textNode(txt))
+	if (typeof txt === 'string') {
+		a.appendChild(textNode(txt))
+	} else {
+		a.appendChild(txt.cloneNode(true))
+	}
 	a.href = '#'
 	a.onclick = function (e) {
 		callback()
@@ -471,9 +475,26 @@ renderJson.setShowByDefault = function (show: boolean) {
 	return renderJson
 }
 
+let openIcon = document.createElementNS(
+	'http://www.w3.org/2000/svg',
+	'svg'
+)
+openIcon.setAttribute('viewBox', '0 0 24 24')
+openIcon.setAttribute('width', '1em')
+openIcon.setAttribute('height', '1em')
+openIcon.style.display = 'inline-block'
+openIcon.style.fill = 'currentColor'
+let path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+path.setAttribute('d', 'M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z')
+openIcon.appendChild(path)
+
+let closeIcon = openIcon.cloneNode(true) as SVGElement
+(closeIcon.querySelector('path') as SVGPathElement)
+	.setAttribute('d', 'M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z')
+
 // Initialize default options
 renderJson
-	.setIcons('⊕', '⊖')
+	.setIcons(closeIcon, openIcon)
 	.setShowByDefault(false)
 	.setSortObjects(false)
 	.setMaxStringLength('none')
