@@ -25,7 +25,7 @@ Example
     import { renderJson } from 'https://esm.sh/jsr/@quinn/json-browser@latest'
 
     document.getElementById("test").appendChild(
-        renderjson({ hello: [1,2,3,4], there: { a:1, b:2, c:["hello", null] } })
+        renderJson({ hello: [1,2,3,4], there: { a:1, b:2, c:["hello", null] } })
     );
 </script>
 ```
@@ -33,7 +33,7 @@ Example
 Usage
 -----
 
-The module exports one entry point, the `renderjson()` function. It takes in
+The module exports one entry point, the `renderJson()` function. It takes in
 the JSON you want to render as a single argument and returns an HTML
 element.
 
@@ -43,14 +43,14 @@ Options
 There are a couple functions to call to customize the output:
 
 ```javascript
-renderjson.setIcons('+', '-');
+renderJson.setIcons('+', '-'); // html elements can be used as well as strings
 ```
 
-Call `setIcons()` to set the disclosure icons to something other than "⊕" and
-"⊖".
+Call `setIcons()` to set the disclosure icons to something other than the 
+default SVG elements.
 
 ```javascript
-renderjson.setShowToLevel(level);
+renderJson.setShowToLevel(level);
 ```
 
 Call `setShowToLevel()` to show different amounts of the JSON by
@@ -60,7 +60,7 @@ default. This, of course, removes the benefit of the lazy rendering, so it
 may be slow with large JSON objects.
 
 ```javascript
-renderjson.setMaxStringLength(length);
+renderJson.setMaxStringLength(length);
 ```
 
 Strings will be truncated and made expandable if they are longer than
@@ -68,14 +68,14 @@ Strings will be truncated and made expandable if they are longer than
 will be no truncation. The default is `"none"`.
 
 ```javascript
-renderjson.setSortObjects(sort_bool);
+renderJson.setSortObjects(sortBool);
 ```
 
 Sort objects by key (default: false)
 
 ```javascript
-renderjson.setReplacer(replacer_function)
-renderjson.setPropertyList(property_list)
+renderJson.setReplacer(replacerFunction)
+renderJson.setPropertyList(propertyList)
 ```
 
 These are the equivalent of the JSON.stringify() `replacer` parameter.
@@ -86,7 +86,7 @@ can do.
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
 
 ```javascript
-renderjson.setCollapseMsg(collapse_function);
+renderJson.setCollapseMsg(collapse_function);
 ```
 
 Accepts a function (len:number):string => {} where len is the length of the
@@ -96,8 +96,9 @@ is collapsed. The default message is "X items".
 These functions are chainable so you may do:
 
 ```javascript
-renderjson.setIcons('+', '-')
-          .setShowToLevel(2)
+renderJson
+    .setIcons('+', '-')
+    .setShowToLevel(2)
         ({ hello: [1,2,3,4], there: { a:1, b:2, c:["hello", null] } })
 ```
 
@@ -124,7 +125,8 @@ Copyright and License
 License: [ISC](https://en.wikipedia.org/wiki/ISC_license)
 
 Copyright © 2013-2017 David Caldwell <david@porkrind.org>
-Copyright © 2025 Quinn Shanahan
+
+Copyright © 2025- Quinn Shanahan
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
