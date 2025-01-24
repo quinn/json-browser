@@ -1,6 +1,8 @@
 JSON Browser
 ============
 
+[![JSR](https://jsr.io/badges/@quinn/json-browser)](https://jsr.io/@quinn/json-browser)
+
 Render JSON into collapsible, themeable HTML. This library aims to be very
 simple with few options and no external dependencies. It's aimed at debugging
 but you can use it wherever it is useful.
