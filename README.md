@@ -16,7 +16,7 @@ that renders initially is a single disclosure icon.
 Live Example
 ------------
 
-[A live example can be found here](http://caldwell.github.io/renderjson).
+[A live example can be found here](https://quinn.github.io/json-browser/test.html).
 
 Example
 -------
